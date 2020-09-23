@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.bean;
+package com.tradesurveil.bean;
 
 /**
  * @author Khyati
