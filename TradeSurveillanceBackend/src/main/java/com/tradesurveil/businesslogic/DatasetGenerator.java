@@ -6,7 +6,7 @@ package com.tradesurveil.businesslogic;
 import java.sql.Timestamp;
 import java.util.*;
 
-import models.TradeForDataGen;
+import com.tradesurveil.bean.TradeForDataGen;
 
 /**
  * @author Kryselle
@@ -147,13 +147,13 @@ public class DatasetGenerator {
 		return initialMarketPrice;
 	}
 	
-	/* public static void main(String args[]) {
+	public static void main(String args[]) {
 		DatasetGenerator datasetGenerator = new DatasetGenerator();
 		List<TradeForDataGen> tradeList = new ArrayList<TradeForDataGen>();
 		tradeList = datasetGenerator.generateRandomTrades(90, 100);
 		for(TradeForDataGen trade: tradeList) {
 			System.out.println(trade.getType() + "\t" + trade.getTimestamp() + "\t" + trade.getSecurityName() + "\t" + trade.getSecurityType() + "\t" + trade.getBrokerName() + "\t" + trade.getTraderName() + "\t" + trade.getPrice() + "\t" + trade.getQuantity());
 		}
-	} */
+	}
 	
 }
