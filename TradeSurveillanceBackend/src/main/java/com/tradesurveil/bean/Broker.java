@@ -7,17 +7,17 @@ package com.tradesurveil.bean;
  * @author Kryselle
  *
  */
-public class Trader {
+public class Broker {
 	
-	private int traderID;
+	private int brokerID;
 	private String name;
 	
-	public int getTraderID() {
-		return traderID;
+	public int getBrokerID() {
+		return brokerID;
 	}
 	
-	public void setTraderID(int traderID) {
-		this.traderID = traderID;
+	public void setBrokerID(int brokerID) {
+		this.brokerID = brokerID;
 	}
 	
 	public String getName() {
@@ -27,5 +27,5 @@ public class Trader {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }
