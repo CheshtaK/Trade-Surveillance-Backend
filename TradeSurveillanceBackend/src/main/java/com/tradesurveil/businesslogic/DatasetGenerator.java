@@ -20,7 +20,7 @@ public class DatasetGenerator {
 	List<String> securityTypeList = generateSecurityTypeList();
 	List<String> tradeTypes = generateTradeTypes();
 	Map<String, Double> marketPrice = initialMarketPrice();
-	Timestamp timestamp = Timestamp.valueOf("2020-10-05 09:00:00");
+	static Timestamp timestamp = Timestamp.valueOf("2020-10-05 09:00:00");
 	Timestamp closingTime = Timestamp.valueOf("2020-10-05 15:00:00");
 	
 	public List<TradeForDataGen> generateTrades() {
@@ -43,7 +43,7 @@ public class DatasetGenerator {
 			trade.setType(tradeTypes.get(generateRandomNumber(0, tradeTypes.size() - 1)));
 			
 			//HARDCODED TIMESTAMP INCREASE RANGE OF 10s
-			timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(1, 10) * 1000);
+			timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(4, 10) * 1000);
 			if(timestamp.compareTo(closingTime) >= 0)
 				return tradeList;
 			trade.setTimestamp(timestamp);
@@ -54,7 +54,7 @@ public class DatasetGenerator {
 			trade.setTraderName(traderList.get(generateRandomNumber(0, traderList.size() - 1)));
 			
 			//HARDCODED QUANTITY RANGE of 100
-			trade.setQuantity(generateRandomNumber(0, 100));
+			trade.setQuantity(generateRandomNumber(1, 100));
 			
 			//HARDCODED MARKET PRICE TO INCREASE PROPORTIONALLY TO QUANTITY IN CASE OF BUY AND DECREASE IN CASE OF SELL WITHIN 5 RUPEE RANGE
 			double currentMarketPrice = marketPrice.get(trade.getSecurityName()+"-"+trade.getSecurityType());
@@ -68,9 +68,84 @@ public class DatasetGenerator {
 				newMarketPrice = currentMarketPrice - decrease;
 			}
 			trade.setPrice(Math.round(newMarketPrice * 100.0) / 100.0);
-			marketPrice.replace(trade.getSecurityName()+"-"+trade.getSecurityType(), newMarketPrice);
 			
+			
+			//code for front running 
+			if(trade.getPrice()*trade.getQuantity()>=1475000) 
+			{
+				TradeForDataGen trade2 = new TradeForDataGen();
+				TradeForDataGen trade3 = new TradeForDataGen();
+				
+				if(trade.getTraderName()!="Citi Group")
+				{
+					if(trade.getType() == "buy")
+					{
+						
+						trade2.setType("buy");
+						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
+						trade2.setTimestamp(timestamp2);
+						trade2.setSecurityType(trade.getSecurityType());
+						trade2.setTraderName("Citi Group");
+						trade2.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
+						trade2.setQuantity(trade.getQuantity());
+						trade2.setSecurityName(trade.getSecurityName());
+						trade2.setPrice(trade.getPrice());
+						
+						trade3.setType("sell");
+						timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(1, 3) * 1000);
+						trade3.setTimestamp(timestamp);
+						trade3.setSecurityType(trade.getSecurityType());
+						trade3.setTraderName("Citi Group");
+						trade3.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
+						trade3.setQuantity(trade.getQuantity());
+						trade3.setSecurityName(trade.getSecurityName());
+						double increase = ((double) trade.getQuantity())/100 * 5;
+						trade3.setPrice(trade.getPrice() + increase);
+						newMarketPrice = currentMarketPrice + increase;
+						
+						
+						tradeList.add(trade2);
+						tradeList.add(trade);
+						tradeList.add(trade3);
+						
+						
+					}
+					else if(trade.getType() == "sell")
+					{
+						trade2.setType("sell");
+						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
+						trade2.setTimestamp(timestamp2);
+						trade2.setSecurityType(trade.getSecurityType());
+						trade2.setTraderName("Citi Group");
+						trade2.setBrokerName(trade.getBrokerName());
+						trade2.setQuantity(trade.getQuantity());
+						trade2.setSecurityName(trade.getSecurityName());
+						trade2.setPrice(trade.getPrice());
+						
+						trade3.setType("buy");
+						timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(1, 3) * 1000);
+						trade3.setTimestamp(timestamp);
+						trade3.setSecurityType(trade.getSecurityType());
+						trade3.setTraderName("Citi Group");
+						trade3.setBrokerName(trade.getBrokerName());
+						trade3.setQuantity(trade.getQuantity());
+						trade3.setSecurityName(trade.getSecurityName());
+						double decrease = ((double) trade.getQuantity())/100 * 5;
+						trade3.setPrice(trade.getPrice() - decrease);
+						newMarketPrice = currentMarketPrice - decrease;
+						
+						tradeList.add(trade2);
+						tradeList.add(trade);
+						tradeList.add(trade3);
+					}
+				}
+				marketPrice.replace(trade.getSecurityName()+"-"+trade.getSecurityType(), newMarketPrice);
+				
+			}
+			else {
+			marketPrice.replace(trade.getSecurityName()+"-"+trade.getSecurityType(), newMarketPrice);
 			tradeList.add(trade);
+			}
 		}
 		
 		return tradeList;
