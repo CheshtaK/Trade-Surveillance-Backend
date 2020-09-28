@@ -59,19 +59,19 @@ public class DatasetGenerator {
 			//HARDCODED MARKET PRICE TO INCREASE PROPORTIONALLY TO QUANTITY IN CASE OF BUY AND DECREASE IN CASE OF SELL WITHIN 5 RUPEE RANGE
 			double currentMarketPrice = marketPrice.get(trade.getSecurityName()+"-"+trade.getSecurityType());
 			double newMarketPrice = currentMarketPrice;
-			if (trade.getType() == "buy") {
-				double increase = ((double) trade.getQuantity())/100 * 5;
-				newMarketPrice = currentMarketPrice + increase;
-			}
-			else {
-				double decrease = ((double) trade.getQuantity())/100 * 5;
-				newMarketPrice = currentMarketPrice - decrease;
-			}
+			//if (trade.getType() == "buy") {
+				//double increase = ((double) trade.getQuantity())/100 * 5;
+				//newMarketPrice = currentMarketPrice + increase;
+		//	}
+		//	else {
+			//	double decrease = ((double) trade.getQuantity())/100 * 5;
+				//newMarketPrice = currentMarketPrice - decrease;
+			//}
 			trade.setPrice(Math.round(newMarketPrice * 100.0) / 100.0);
 			
 			
 			//code for front running 
-			if(trade.getPrice()*trade.getQuantity()>=1475000) 
+			if(trade.getPrice()*trade.getQuantity()>=640000 && (trade.getSecurityType()=="ES"||trade.getSecurityType()=="Futures")) 
 			{
 				TradeForDataGen trade2 = new TradeForDataGen();
 				TradeForDataGen trade3 = new TradeForDataGen();
@@ -80,28 +80,46 @@ public class DatasetGenerator {
 				{
 					if(trade.getType() == "buy")
 					{
+						trade2.setSecurityType(securityTypeList.get(generateRandomNumber(0, securityTypeList.size() - 1)));
+						trade3.setSecurityType(trade2.getSecurityType());
+						double increase;
+						//if put type then sbb situation
+						if(trade2.getSecurityType()=="Put")
+						{
+							
+							trade2.setType("sell");
+							trade3.setType("buy");
+							 increase = ((double) trade.getQuantity())/100 * (-5);
+						}
+						else
+						{
+							//for call option bullish view propogates
+							trade2.setType("buy");
+							trade3.setType("sell");
+							 increase = ((double) trade.getQuantity())/100 * 5;
+						}
 						
-						trade2.setType("buy");
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
 						trade2.setTimestamp(timestamp2);
-						trade2.setSecurityType(trade.getSecurityType());
 						trade2.setTraderName("Citi Group");
 						trade2.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
 						trade2.setQuantity(trade.getQuantity());
 						trade2.setSecurityName(trade.getSecurityName());
-						trade2.setPrice(trade.getPrice());
+						trade2.setPrice(marketPrice.get(trade2.getSecurityName()+"-"+trade2.getSecurityType()));
 						
-						trade3.setType("sell");
+						newMarketPrice = marketPrice.get(trade2.getSecurityName()+"-"+trade2.getSecurityType()) + increase;
+						marketPrice.replace(trade2.getSecurityName()+"-"+trade2.getSecurityType(), newMarketPrice);
+						
+						
 						timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(1, 3) * 1000);
 						trade3.setTimestamp(timestamp);
-						trade3.setSecurityType(trade.getSecurityType());
 						trade3.setTraderName("Citi Group");
 						trade3.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
 						trade3.setQuantity(trade.getQuantity());
-						trade3.setSecurityName(trade.getSecurityName());
-						double increase = ((double) trade.getQuantity())/100 * 5;
-						trade3.setPrice(trade.getPrice() + increase);
-						newMarketPrice = currentMarketPrice + increase;
+						trade3.setSecurityName(trade2.getSecurityName());
+						
+						trade3.setPrice(marketPrice.get(trade3.getSecurityName()+"-"+trade3.getSecurityType()));
+						
 						
 						
 						tradeList.add(trade2);
@@ -112,27 +130,43 @@ public class DatasetGenerator {
 					}
 					else if(trade.getType() == "sell")
 					{
-						trade2.setType("sell");
+						trade2.setSecurityType(securityTypeList.get(generateRandomNumber(0, securityTypeList.size() - 1)));
+						trade3.setSecurityType(trade2.getSecurityType());
+						double decrease;
+						
+						if(trade2.getSecurityType()=="Put")
+						{
+							
+							trade2.setType("buy");
+							trade3.setType("sell");
+							 decrease = ((double) trade.getQuantity())/100 * (-5);
+						}
+						else
+						{
+							trade2.setType("sell");
+							trade3.setType("buy");
+							 decrease = ((double) trade.getQuantity())/100 * 5;
+							
+						}
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
 						trade2.setTimestamp(timestamp2);
-						trade2.setSecurityType(trade.getSecurityType());
 						trade2.setTraderName("Citi Group");
 						trade2.setBrokerName(trade.getBrokerName());
 						trade2.setQuantity(trade.getQuantity());
 						trade2.setSecurityName(trade.getSecurityName());
-						trade2.setPrice(trade.getPrice());
+						trade2.setPrice(marketPrice.get(trade2.getSecurityName()+"-"+trade2.getSecurityType()));
+						newMarketPrice =  marketPrice.get(trade2.getSecurityName()+"-"+trade2.getSecurityType()) - decrease;
+						marketPrice.replace(trade2.getSecurityName()+"-"+trade2.getSecurityType(), newMarketPrice);
 						
-						trade3.setType("buy");
+						
 						timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(1, 3) * 1000);
 						trade3.setTimestamp(timestamp);
-						trade3.setSecurityType(trade.getSecurityType());
 						trade3.setTraderName("Citi Group");
 						trade3.setBrokerName(trade.getBrokerName());
 						trade3.setQuantity(trade.getQuantity());
 						trade3.setSecurityName(trade.getSecurityName());
-						double decrease = ((double) trade.getQuantity())/100 * 5;
-						trade3.setPrice(trade.getPrice() - decrease);
-						newMarketPrice = currentMarketPrice - decrease;
+						trade3.setPrice(marketPrice.get(trade3.getSecurityName()+"-"+trade3.getSecurityType()));
+						
 						
 						tradeList.add(trade2);
 						tradeList.add(trade);
@@ -205,19 +239,19 @@ public class DatasetGenerator {
 		Map<String, Double> initialMarketPrice = new HashMap<String, Double>();
 		
 		initialMarketPrice.put("Apple-ES", 8074.27);
-		initialMarketPrice.put("Apple-Futures",8074.27);
-		initialMarketPrice.put("Apple-Call", 8074.27);
-		initialMarketPrice.put("Apple-Put", 8074.27);
+		initialMarketPrice.put("Apple-Futures",7074.27);
+		initialMarketPrice.put("Apple-Call", 6774.27);
+		initialMarketPrice.put("Apple-Put", 5374.27);
 		
-		initialMarketPrice.put("Facebook-ES", 18444.31);
-		initialMarketPrice.put("Facebook-Futures", 18444.31);
-		initialMarketPrice.put("Facebook-Call", 18444.31);
-		initialMarketPrice.put("Facebook-Put", 18444.31);
+		initialMarketPrice.put("Facebook-ES", 9444.31);
+		initialMarketPrice.put("Facebook-Futures", 6274.31);
+		initialMarketPrice.put("Facebook-Call", 8000.31);
+		initialMarketPrice.put("Facebook-Put", 5667.31);
 		
-		initialMarketPrice.put("Walmart-ES", 10074.60);
-		initialMarketPrice.put("Walmart-Futures", 10074.60);
-		initialMarketPrice.put("Walmart-Call", 10074.60);
-		initialMarketPrice.put("Walmart-Put", 10074.60);
+		initialMarketPrice.put("Walmart-ES", 8774.60);
+		initialMarketPrice.put("Walmart-Futures", 12074.60);
+		initialMarketPrice.put("Walmart-Call", 7074.60);
+		initialMarketPrice.put("Walmart-Put", 4074.60);
 		
 		return initialMarketPrice;
 	}
