@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tradesurveil.bean.TradeForDataGen;
+import com.tradesurveil.businesslogic.DatasetGenerator;
 import com.tradesurveil.businesslogic.DetectFrontRunning;
 
 @SpringBootApplication
@@ -31,17 +32,20 @@ public class TradeSurveillanceBackendApplication {
 	public static void main(String[] args) {
 //		SpringApplication.run(TradeSurveillanceBackendApplication.class, args);
 		
+		DatasetGenerator datasetGenerator = new DatasetGenerator();
 		List<TradeForDataGen> tradeList = new ArrayList<TradeForDataGen>();
 		HashMap<List<TradeForDataGen>, String> results = new HashMap<>();
 		
-		TradeForDataGen firmOrderPast = initializeData("buy","2020-10-05 10:14:12","Facebook", "ES", 150, 854, "Citi Group", "Citi" );
-		tradeList.add(firmOrderPast);
-		TradeForDataGen clientOrder = initializeData("buy","2020-10-05 10:14:23","Facebook", "Futures",15000, 854.5, "Client", "Citi" );
-		tradeList.add(clientOrder);
-		TradeForDataGen firmOrderFuture1 = initializeData("sell","2020-10-05 10:15:02","Facebook", "ES",120, 862.33, "Citi Group", "Citi" );
-		tradeList.add(firmOrderFuture1);
-		TradeForDataGen firmOrderFuture2 = initializeData("sell","2020-10-05 10:15:05","Facebook", "ES",30, 861, "Citi Group", "Citi" );
-		tradeList.add(firmOrderFuture2);
+		tradeList = datasetGenerator.generateRandomTrades(90, 100);
+		
+//		TradeForDataGen firmOrderPast = initializeData("buy","2020-10-05 10:14:12","Facebook", "ES", 150, 854, "Citi Group", "Citi" );
+//		tradeList.add(firmOrderPast);
+//		TradeForDataGen clientOrder = initializeData("buy","2020-10-05 10:14:23","Facebook", "Futures",15000, 854.5, "Client", "Citi" );
+//		tradeList.add(clientOrder);
+//		TradeForDataGen firmOrderFuture1 = initializeData("sell","2020-10-05 10:15:02","Facebook", "ES",120, 862.33, "Citi Group", "Citi" );
+//		tradeList.add(firmOrderFuture1);
+//		TradeForDataGen firmOrderFuture2 = initializeData("sell","2020-10-05 10:15:05","Facebook", "ES",30, 861, "Citi Group", "Citi" );
+//		tradeList.add(firmOrderFuture2);
 		
 		DetectFrontRunning tester = new DetectFrontRunning();
 		results = tester.detectFrontRunning(tradeList);

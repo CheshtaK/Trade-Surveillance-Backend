@@ -20,7 +20,7 @@ public class DetectFrontRunning {
 	private List<Integer> indexListLargeClients = new ArrayList<>();
 	
 	//HARDCODED AND TO BE UPDATED
-	private double thresholdSecurityValue = 100000d;
+	private double thresholdSecurityValue = 1475000d;
 	private long thresholdTimeMilliseconds = 60000;
 	
 	
