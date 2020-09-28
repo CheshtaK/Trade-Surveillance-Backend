@@ -31,7 +31,7 @@ class DetectFrontRunningSSBTest {
 	}
 	
 	@Test
-	void testFrontRunning_BBS_ES_ES_ES(){
+	void testFrontRunning_SSB_ES_ES_ES(){
 		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 9:05:38","Walmart", "ES",100, 10075.6, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:05:42","Walmart", "ES",5000, 10075.2, "Client", "Citi" );
@@ -45,7 +45,7 @@ class DetectFrontRunningSSBTest {
 	}
 	
 	@Test
-	void testFrontRunning_BBS_Fut_ES_Fut(){
+	void testFrontRunning_SSB_Fut_ES_Fut(){
 		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 9:34:58","Apple", "Futures", 200, 1002, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:35:12","Apple", "ES",12000, 1000.06, "Client", "Citi" );
@@ -59,7 +59,7 @@ class DetectFrontRunningSSBTest {
 	}
 	
 	@Test
-	void testFrontRunning_BBS_Call_ES_Call(){
+	void testFrontRunning_SSB_Call_ES_Call(){
 		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 9:34:58","Apple", "Call", 200, 1352.8, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:35:12","Apple", "ES",12000, 1351.3, "Client", "Citi" );
@@ -73,7 +73,7 @@ class DetectFrontRunningSSBTest {
 	}
 	
 	@Test
-	void testFrontRunning_BBS_ES_Fut_ES(){
+	void testFrontRunning_SSB_ES_Fut_ES(){
 		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 10:14:12","Facebook", "ES", 150, 862.33, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 10:14:23","Facebook", "Futures",15000, 861, "Client", "Citi" );
@@ -90,7 +90,7 @@ class DetectFrontRunningSSBTest {
 	}
 	
 	@Test
-	void testFrontRunning_BBS_Fut_Fut_Fut(){
+	void testFrontRunning_SSB_Fut_Fut_Fut(){
 		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 9:05:38","Apple", "Futures", 400, 1202.8, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:05:42","Apple", "Futures",10000, 1201.3, "Client", "Citi" );
@@ -104,7 +104,7 @@ class DetectFrontRunningSSBTest {
 	}
 	
 	@Test
-	void testFrontRunning_BBS_Call_Fut_Call(){
+	void testFrontRunning_SSB_Call_Fut_Call(){
 		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 9:34:58","Apple", "Call", 400, 1751.8, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:35:12","Apple", "Futures",10000, 1751.3, "Client", "Citi" );

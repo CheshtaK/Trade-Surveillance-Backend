@@ -177,29 +177,3 @@ public class DetectFrontRunning {
 	}
 }
 
-
-
-////Scenario 2 - SSB
-//if(firmOrderPast.getType().equals("sell") &&
-//		clientOrder.getType().equals("sell") &&
-//		firmOrderFuture.getType().equals("buy")) {
-//	
-//	String FirmSecurityTypePast = firmOrderPast.getSecurityType();
-//	String ClientSecurityType = clientOrder.getSecurityType();
-//	String FirmSecurityTypeFuture = firmOrderFuture.getSecurityType();
-//	
-//	if((FirmSecurityTypePast.equals("ES") && ClientSecurityType.equals("ES") && FirmSecurityTypeFuture.equals("ES")) ||
-//			(FirmSecurityTypePast.equals("Futures") && ClientSecurityType.equals("ES") && FirmSecurityTypeFuture.equals("Futures")) ||
-//			(FirmSecurityTypePast.equals("Call") && ClientSecurityType.equals("ES") && FirmSecurityTypeFuture.equals("Call")) ||
-//			(FirmSecurityTypePast.equals("ES") && ClientSecurityType.equals("Futures") && FirmSecurityTypeFuture.equals("ES")) ||
-//			(FirmSecurityTypePast.equals("Futures") && ClientSecurityType.equals("Futures") && FirmSecurityTypeFuture.equals("Futures")) ||
-//			(FirmSecurityTypePast.equals("Call") && ClientSecurityType.equals("Futures") && FirmSecurityTypeFuture.equals("Call"))
-//			) {
-//		List<TradeForDataGen> temp = new ArrayList<>();
-//		temp.add(firmOrderPast);
-//		temp.add(clientOrder);
-//		temp.add(firmOrderFuture);
-//		hashmap.put(temp, "FR2-SSB");
-//	}
-//}
-//
