@@ -77,7 +77,7 @@ public class DetectFrontRunning {
 					
 					List<Integer> futureTradesIndex = getFutureFirmTrades(tradeList, idxPast, i);
 					
-					if(futureTradesIndex.size() == 0) continue;
+					if(futureTradesIndex.size() == 0) continue; // no front-running in this case, continue to check 
 					
 					List<TradeForDataGen> temp = new ArrayList<>();
 					String FirmSecurityTypePast = firmOrderPast.getSecurityType();
@@ -90,7 +90,6 @@ public class DetectFrontRunning {
 						for(int idxFuture: futureTradesIndex) {
 							firmOrderFuture = tradeList.get(idxFuture);
 							String FirmSecurityTypeFuture = firmOrderFuture.getSecurityType();
-							
 							if((FirmSecurityTypePast.equals("ES") && ClientSecurityType.equals("ES") && FirmSecurityTypeFuture.equals("ES")) ||
 									(FirmSecurityTypePast.equals("Futures") && ClientSecurityType.equals("ES") && FirmSecurityTypeFuture.equals("Futures")) ||
 									(FirmSecurityTypePast.equals("Call") && ClientSecurityType.equals("ES") && FirmSecurityTypeFuture.equals("Call")) ||
