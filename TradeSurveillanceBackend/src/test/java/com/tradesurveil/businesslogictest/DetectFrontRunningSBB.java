@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.tradesurveil.bean.FrontRunningScenario;
 import com.tradesurveil.bean.TradeForDataGen;
 import com.tradesurveil.businesslogic.DetectFrontRunning;
 
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 class DetectFrontRunningSBB {
 	
 	private List<TradeForDataGen> tradeList = new ArrayList<TradeForDataGen>();
-	private HashMap<List<TradeForDataGen>, String> hashmap = new HashMap<>();
+	private List<FrontRunningScenario> detectedTrades = new ArrayList<>();
 	
 	private TradeForDataGen initializeData(String type,String t,String securityName,String securityType, int quantity, double price, String traderName, String brokerName) {
 		TradeForDataGen tempTrade = new TradeForDataGen();
@@ -43,8 +44,9 @@ class DetectFrontRunningSBB {
 		tradeList.add(firmOrderFuture);
 		
 		DetectFrontRunning tester = new DetectFrontRunning();
-		hashmap = tester.detectFrontRunning(tradeList);
-		assertEquals("FR4-SBB",hashmap.get(tradeList));
+		detectedTrades = tester.detectFrontRunning(tradeList);
+		assertEquals(detectedTrades.size(), 1);
+		assertEquals(detectedTrades.get(0).getScenario(), "FR4-SBB");
 	}
 	
 	@Test
@@ -57,8 +59,9 @@ class DetectFrontRunningSBB {
 		tradeList.add(firmOrderFuture);
 		
 		DetectFrontRunning tester = new DetectFrontRunning();
-		hashmap = tester.detectFrontRunning(tradeList);
-		assertEquals("FR4-SBB",hashmap.get(tradeList));
+		detectedTrades = tester.detectFrontRunning(tradeList);
+		assertEquals(detectedTrades.size(), 1);
+		assertEquals(detectedTrades.get(0).getScenario(), "FR4-SBB");
 	}
 
 }
