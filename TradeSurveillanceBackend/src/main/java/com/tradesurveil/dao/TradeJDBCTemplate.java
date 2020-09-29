@@ -29,7 +29,7 @@ public class TradeJDBCTemplate implements TradeDAO {
 	}
 
 	public List<TradeForDataGen> fetchTradeList() {
-		String SQL = "SELECT * FROM Trades;";
+		String SQL = "SELECT * FROM Trades ORDER BY timestamp ASC;";
 		List<TradeForDataGen> tradeList = jdbcTemplateObject.query(SQL, new TradeMapper());
 		return tradeList;
 	}

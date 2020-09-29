@@ -1,4 +1,4 @@
-package come.tradesurveil.controller;
+package com.tradesurveil.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +34,11 @@ public class TradeController {
 			tradeJDBCTemplate.insertTrade(trade);
 		}
 		
+		@RequestMapping(value = TradeRestURIConstants.FETCH_TRADELIST, method = RequestMethod.GET)
+		public @ResponseBody List<TradeForDataGen> fetchTradeList() {
+			List<TradeForDataGen> tradeList = tradeJDBCTemplate.fetchTradeList();
+			return tradeList;
+		}
 		
 		@RequestMapping(value = TradeRestURIConstants.GET_FRONT_RUNNING_TRADES, method = RequestMethod.GET)
 		public @ResponseBody List<FrontRunningScenario> frontRunningTradesDetector() {
