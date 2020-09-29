@@ -19,5 +19,6 @@ public interface TradeDAO {
 	public List<TradeForDataGen> fetchTradeList();
 	public void insertTradeList(List<TradeForDataGen> tradeList);
 	public void deleteTrades();
+	public List<TradeForDataGen> getTradeList();
 	
 }

@@ -23,8 +23,7 @@ public class TradeJDBCTemplate implements TradeDAO {
 	
 	public void insertTrade(TradeForDataGen trade) {
 		String SQL = "INSERT INTO Trades (type, timestamp, security_name, security_type, broker_name, trader_name, quantity, price) values (?, ?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplateObject.update( SQL, trade.getType(), trade.getTimestamp(), trade.getSecurityName(), trade.getSecurityType(), trade.getBrokerName(), trade.getTraderName(), trade.getQuantity(), trade.getPrice());
-		return;
+		jdbcTemplateObject.update(SQL, trade.getType(), trade.getTimestamp(), trade.getSecurityName(), trade.getSecurityType(), trade.getBrokerName(), trade.getTraderName(), trade.getQuantity(), trade.getPrice());
 	}
 
 	public List<TradeForDataGen> fetchTradeList() {
@@ -50,15 +49,14 @@ public class TradeJDBCTemplate implements TradeDAO {
 		jdbcTemplateObject.execute(SQL);
 	}
 	
-	public static void main(String args[]) {
+	public List<TradeForDataGen> getTradeList() {
 		DatasetGenerator datasetGenerator = new DatasetGenerator();
 		List<TradeForDataGen> tradeList = new ArrayList<>();
-		tradeList = datasetGenerator.generateRandomTrades(90, 100);
 		TradeJDBCTemplate tradeJDBCTemplate = new TradeJDBCTemplate();
+		
+		tradeList = datasetGenerator.generateRandomTrades(90, 100);
 		tradeJDBCTemplate.insertTradeList(tradeList);
 		tradeList = tradeJDBCTemplate.fetchTradeList();
-		for (TradeForDataGen trade: tradeList) {
-			System.out.println(trade.getType() + "\t" + trade.getTimestamp() + "\t" + trade.getSecurityName() + "\t" + trade.getSecurityType() + "\t" + trade.getBrokerName() + "\t" + trade.getTraderName() + "\t" + trade.getQuantity() + "\t" + trade.getPrice());
-		}
+		return tradeList;
 	}
 }
