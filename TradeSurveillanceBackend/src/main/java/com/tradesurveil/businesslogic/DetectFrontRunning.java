@@ -3,11 +3,11 @@
  */
 package com.tradesurveil.businesslogic;
 
+import com.tradesurveil.bean.FrontRunningScenario;
 import com.tradesurveil.bean.TradeForDataGen;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author Khyati
@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class DetectFrontRunning {
 	// Hashmap to store detected front-running transactions along with the scenario
-	private HashMap<List<TradeForDataGen>, String> hashmap = new HashMap<>();
+	private List<FrontRunningScenario> detectedTrades = new ArrayList<>();
 	private List<Integer> indexListLargeClients = new ArrayList<>();
 	
 	//HARDCODED AND TO BE UPDATED
@@ -56,7 +56,7 @@ public class DetectFrontRunning {
 	}
 	
 	
-	public HashMap<List<TradeForDataGen>, String> detectFrontRunning(List<TradeForDataGen> tradeList){
+	public List<FrontRunningScenario> detectFrontRunning(List<TradeForDataGen> tradeList){
 		/** Returns detected front-running trades along with the type of scenario 
 		 * 1-BBS, 2-SSB, 3-BSS, 4-SBB
 		 * */
@@ -101,9 +101,10 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(0, firmOrderPast);	
-							temp.add(1, clientOrder);
-							hashmap.put(temp, "FR1-BBS");	
+							FrontRunningScenario scenario = new FrontRunningScenario();
+							scenario.setInvolvedTrades(temp);
+							scenario.setScenario("FR1-BBS");
+							detectedTrades.add(scenario);
 						}
 					}
 					//Scenario 2 - SSB
@@ -125,9 +126,10 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(0, firmOrderPast);	
-							temp.add(1, clientOrder);
-							hashmap.put(temp, "FR2-SSB");	
+							FrontRunningScenario scenario = new FrontRunningScenario();
+							scenario.setInvolvedTrades(temp);
+							scenario.setScenario("FR2-SSB");
+							detectedTrades.add(scenario);
 						}	
 					}
 					//Scenario 3 - BSS
@@ -145,9 +147,10 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(0, firmOrderPast);	
-							temp.add(1, clientOrder);
-							hashmap.put(temp, "FR3-BSS");	
+							FrontRunningScenario scenario = new FrontRunningScenario();
+							scenario.setInvolvedTrades(temp);
+							scenario.setScenario("FR3-BSS");
+							detectedTrades.add(scenario);
 						}	
 					}
 					//Scenario 4 - SBB
@@ -165,15 +168,16 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(0, firmOrderPast);	
-							temp.add(1, clientOrder);
-							hashmap.put(temp, "FR4-SBB");	
+							FrontRunningScenario scenario = new FrontRunningScenario();
+							scenario.setInvolvedTrades(temp);
+							scenario.setScenario("FR4-SBB");
+							detectedTrades.add(scenario);
 						}
 					}					
 				}
 			}
 		}
-		return hashmap;
+		return detectedTrades;
 	}
 }
 

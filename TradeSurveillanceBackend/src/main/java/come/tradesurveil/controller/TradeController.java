@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tradesurveil.dao.TradeJDBCTemplate;
+import com.tradesurveil.bean.FrontRunningScenario;
 import com.tradesurveil.bean.TradeForDataGen;
 import com.tradesurveil.businesslogic.DetectFrontRunning;
 
@@ -35,11 +36,11 @@ public class TradeController {
 		
 		
 		@RequestMapping(value = TradeRestURIConstants.GET_FRONT_RUNNING_TRADES, method = RequestMethod.GET)
-		public @ResponseBody HashMap<List<TradeForDataGen>, String> frontRunningTradesDetector() {
+		public @ResponseBody List<FrontRunningScenario> frontRunningTradesDetector() {
 			
 			List<TradeForDataGen> tradeList = tradeJDBCTemplate.fetchTradeList();
 			DetectFrontRunning detector = new DetectFrontRunning();
-			HashMap<List<TradeForDataGen>, String> frontRunningTradeList = detector.detectFrontRunning(tradeList);
+			List<FrontRunningScenario> frontRunningTradeList = detector.detectFrontRunning(tradeList);
 			return frontRunningTradeList;
 		}
 }
