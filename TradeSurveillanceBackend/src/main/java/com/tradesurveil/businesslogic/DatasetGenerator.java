@@ -103,7 +103,7 @@ public class DatasetGenerator {
 						trade2.setTimestamp(timestamp2);
 						trade2.setTraderName("Citi Group");
 						trade2.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
-						trade2.setQuantity(trade.getQuantity());
+						trade2.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade2.setSecurityName(trade.getSecurityName());
 						trade2.setPrice(marketPrice.get(trade2.getSecurityName()+"-"+trade2.getSecurityType()));
 						
@@ -115,7 +115,7 @@ public class DatasetGenerator {
 						trade3.setTimestamp(timestamp);
 						trade3.setTraderName("Citi Group");
 						trade3.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
-						trade3.setQuantity(trade.getQuantity());
+						trade3.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade3.setSecurityName(trade2.getSecurityName());
 						
 						trade3.setPrice(marketPrice.get(trade3.getSecurityName()+"-"+trade3.getSecurityType()));
@@ -152,7 +152,7 @@ public class DatasetGenerator {
 						trade2.setTimestamp(timestamp2);
 						trade2.setTraderName("Citi Group");
 						trade2.setBrokerName(trade.getBrokerName());
-						trade2.setQuantity(trade.getQuantity());
+						trade2.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade2.setSecurityName(trade.getSecurityName());
 						trade2.setPrice(marketPrice.get(trade2.getSecurityName()+"-"+trade2.getSecurityType()));
 						newMarketPrice =  marketPrice.get(trade2.getSecurityName()+"-"+trade2.getSecurityType()) - decrease;
@@ -163,7 +163,7 @@ public class DatasetGenerator {
 						trade3.setTimestamp(timestamp);
 						trade3.setTraderName("Citi Group");
 						trade3.setBrokerName(trade.getBrokerName());
-						trade3.setQuantity(trade.getQuantity());
+						trade3.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade3.setSecurityName(trade.getSecurityName());
 						trade3.setPrice(marketPrice.get(trade3.getSecurityName()+"-"+trade3.getSecurityType()));
 						

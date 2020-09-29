@@ -36,10 +36,39 @@ public class TradeSurveillanceBackendApplication {
 		List<TradeForDataGen> tradeList = new ArrayList<TradeForDataGen>();
 		HashMap<List<TradeForDataGen>, String> results = new HashMap<>();
 		
-		tradeList = datasetGenerator.generateRandomTrades(90, 100);
+//		tradeList = datasetGenerator.generateRandomTrades(90, 100);
 		
-//		TradeForDataGen firmOrderPast = initializeData("buy","2020-10-05 10:14:12","Facebook", "ES", 150, 854, "Citi Group", "Citi" );
-//		tradeList.add(firmOrderPast);
+		TradeForDataGen order1 = initializeData("sell","2020-10-05 10:14:12","Facebook", "ES", 1000, 23, "Citi Group", "Citi" );
+		tradeList.add(order1);
+		TradeForDataGen order2 = initializeData("sell","2020-10-05 10:14:16","Facebook", "ES", 25000, 23, "Client", "Citi" );
+		tradeList.add(order2);
+		TradeForDataGen order3 = initializeData("buy","2020-10-05 10:15:10","Facebook", "ES", 800, 21, "Citi Group", "Citi" );
+		tradeList.add(order3);
+		TradeForDataGen order4 = initializeData("buy","2020-10-05 10:16:12","Facebook", "ES", 3000, 24, "Citi Group", "Citi" );
+		tradeList.add(order4);
+		TradeForDataGen order5 = initializeData("buy","2020-10-05 10:16:20","Facebook", "Futures", 20000, 23, "Client", "Citi" );
+		tradeList.add(order5);
+		TradeForDataGen order6 = initializeData("sell","2020-10-05 10:16:25","Facebook", "Futures", 3000, 21, "Citi Group", "Citi" );
+		tradeList.add(order6);
+		TradeForDataGen order7 = initializeData("buy","2020-10-05 10:16:30","Facebook", "Futures", 5000, 28, "Citi Group", "Citi" );
+		tradeList.add(order7);
+		TradeForDataGen order8 = initializeData("sell","2020-10-05 10:16:34","Facebook", "Call", 35000, 3, "Client", "Citi" );
+		tradeList.add(order8);
+		TradeForDataGen order9 = initializeData("buy","2020-10-05 10:16:36","Facebook", "Call", 5000, 4, "Citi Group", "Citi" );
+		tradeList.add(order9);
+		TradeForDataGen order10 = initializeData("buy","2020-10-05 10:16:45","Facebook", "Put", 1000, 2, "Citi Group", "Citi" );
+		tradeList.add(order10);
+		TradeForDataGen order11 = initializeData("sell","2020-10-05 10:16:48","Facebook", "Futures", 30000, 30, "Client", "Citi" );
+		tradeList.add(order11);
+		TradeForDataGen order12 = initializeData("sell","2020-10-05 10:16:50","Facebook", "Put", 1000, 3, "Citi Group", "Citi" );
+		tradeList.add(order12);
+		TradeForDataGen order13 = initializeData("sell","2020-10-05 10:16:53","Facebook", "Futures", 2300, 31, "Citi Group", "Citi" );
+		tradeList.add(order13);
+		TradeForDataGen order14 = initializeData("sell","2020-10-05 10:16:56","Facebook", "ES", 23000, 30, "Client", "Citi" );
+		tradeList.add(order14);
+		TradeForDataGen order15 = initializeData("buy","2020-10-05 10:16:58","Facebook", "Futures", 2250, 33, "Citi Group", "Citi" );
+		tradeList.add(order15);
+		
 //		TradeForDataGen clientOrder = initializeData("buy","2020-10-05 10:14:23","Facebook", "Futures",15000, 854.5, "Client", "Citi" );
 //		tradeList.add(clientOrder);
 //		TradeForDataGen firmOrderFuture1 = initializeData("sell","2020-10-05 10:15:02","Facebook", "ES",120, 862.33, "Citi Group", "Citi" );
@@ -55,7 +84,7 @@ public class TradeSurveillanceBackendApplication {
 			for(TradeForDataGen trade: tradeSet)
 				System.out.println(trade.getType() + "\t" + trade.getTimestamp() + "\t" + trade.getSecurityName() + "\t" + trade.getSecurityType() + "\t" + trade.getBrokerName() + "\t" + trade.getTraderName() + "\t" + trade.getPrice() + "\t" + trade.getQuantity());
 		}
-		
+		 
 	}
 
 }
