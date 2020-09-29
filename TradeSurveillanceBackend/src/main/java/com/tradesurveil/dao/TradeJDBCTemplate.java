@@ -11,10 +11,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.tradesurveil.bean.TradeForDataGen;
 import com.tradesurveil.businesslogic.DatasetGenerator;
 
+
 public class TradeJDBCTemplate implements TradeDAO {
 	@SuppressWarnings("unused")
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
+	
 	   
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -35,11 +37,9 @@ public class TradeJDBCTemplate implements TradeDAO {
 	
 	@SuppressWarnings("resource")
 	public void insertTradeList(List<TradeForDataGen> tradeList) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-		TradeJDBCTemplate tradeJDBCTemplate = (TradeJDBCTemplate)context.getBean("tradeJDBCTemplate");
-		tradeJDBCTemplate.deleteTrades();
+		deleteTrades();
 		for (TradeForDataGen trade : tradeList) {
-			tradeJDBCTemplate.insertTrade(trade);
+			insertTrade(trade);
 		}
 	}
 	
@@ -51,10 +51,13 @@ public class TradeJDBCTemplate implements TradeDAO {
 	}
 	
 	public static void main(String args[]) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		TradeJDBCTemplate tradeJDBCTemplate = (TradeJDBCTemplate)context.getBean("tradeJDBCTemplate");
+		
+		
 		DatasetGenerator datasetGenerator = new DatasetGenerator();
 		List<TradeForDataGen> tradeList = new ArrayList<>();
 		tradeList = datasetGenerator.generateRandomTrades(90, 100);
-		TradeJDBCTemplate tradeJDBCTemplate = new TradeJDBCTemplate();
 		tradeJDBCTemplate.insertTradeList(tradeList);
 		tradeList = tradeJDBCTemplate.fetchTradeList();
 		for (TradeForDataGen trade: tradeList) {
