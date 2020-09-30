@@ -101,6 +101,8 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
+							temp.add(firmOrderPast);
+							temp.add(clientOrder);
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
 							scenario.setScenario("FR1-BBS");
@@ -126,6 +128,9 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
+							temp.add(firmOrderPast);
+							temp.add(clientOrder);
+							
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
 							scenario.setScenario("FR2-SSB");
@@ -147,6 +152,9 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
+							temp.add(firmOrderPast);
+							temp.add(clientOrder);
+							
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
 							scenario.setScenario("FR3-BSS");
@@ -168,6 +176,9 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
+							temp.add(firmOrderPast);
+							temp.add(clientOrder);
+							
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
 							scenario.setScenario("FR4-SBB");
