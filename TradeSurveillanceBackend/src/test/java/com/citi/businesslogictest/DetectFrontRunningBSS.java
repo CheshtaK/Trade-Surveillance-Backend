@@ -1,4 +1,4 @@
-package com.tradesurveil.businesslogictest;
+package com.citi.businesslogictest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,12 +15,22 @@ import com.citi.businesslogic.DetectFrontRunning;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * JUnit test for Detection algorithm on Scenario 3 - Buy, Sell, Sell
+ * @author Khyati
+ *
+ */
+
 class DetectFrontRunningBSS {
 	
 	private List<TradeForDataGen> tradeList = new ArrayList<TradeForDataGen>();
 	private List<FrontRunningScenario> detectedTrades = new ArrayList<>();
 	
 	private TradeForDataGen initializeData(String type,String t,String securityName,String securityType, int quantity, double price, String traderName, String brokerName) {
+		/**
+		 * Method to initialize TradeForDataGen objects
+		 * to store in tradeList
+		 */
 		TradeForDataGen tempTrade = new TradeForDataGen();
 		Timestamp timestamp = Timestamp.valueOf(t);
 		tempTrade.setType(type);
@@ -36,6 +46,9 @@ class DetectFrontRunningBSS {
 	
 	@Test
 	void testFrontRunning_BSS_Put_ES_Put(){
+		/**
+		 * Test for <Put option, Equity shares, Put option> combination in Scenario 3
+		 */
 		TradeForDataGen firmOrderPast = initializeData("buy","2020-10-05 9:05:38","Facebook", "Put",130, 18444.31, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:05:42","Facebook", "ES",9500, 18444.43, "Client", "Citi" );
@@ -51,6 +64,9 @@ class DetectFrontRunningBSS {
 	
 	@Test
 	void testFrontRunning_BSS_Put_Fut_Put(){
+		/**
+		 * Test for <Put option, Put option, Put option> combination in Scenario 3
+		 */
 		TradeForDataGen firmOrderPast = initializeData("buy","2020-10-05 9:05:38","Facebook", "Put",130, 18444.31, "Citi Group", "Citi" );
 		tradeList.add(firmOrderPast);
 		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:05:42","Facebook", "Futures",9500, 18444.43, "Client", "Citi" );

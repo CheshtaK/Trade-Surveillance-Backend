@@ -84,7 +84,7 @@ public class TradeJDBCTemplate implements TradeDAO {
 	 */
 	@SuppressWarnings("resource")
 	public List<TradeForDataGen> getTradeList() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		TradeJDBCTemplate tradeJDBCTemplate = (TradeJDBCTemplate)context.getBean("tradeJDBCTemplate");
 		DatasetGenerator datasetGenerator = new DatasetGenerator();
 		List<TradeForDataGen> tradeList = new ArrayList<>();

@@ -62,7 +62,7 @@ public class DatasetGenerator {
 			//HARDCODED MARKET PRICE TO INCREASE PROPORTIONALLY TO QUANTITY IN CASE OF BUY AND DECREASE IN CASE OF SELL WITHIN 5 RUPEE RANGE
 			double currentMarketPrice = marketPrice.get(trade.getSecurityName()+"-"+trade.getSecurityType());
 			double newMarketPrice = currentMarketPrice;
-			/*if (trade.getType() == "buy") {
+			/*if (trade.getType() == "Buy") {
 				double increase = ((double) trade.getQuantity())/100 * 5;
 				newMarketPrice = currentMarketPrice + increase;
 			}
@@ -81,20 +81,20 @@ public class DatasetGenerator {
 				
 				if(trade.getTraderName()!="Citi Group") {
 					
-					if(trade.getType() == "buy") {
+					if(trade.getType() == "Buy") {
 						trade2.setSecurityType(securityTypeList.get(generateRandomNumber(0, securityTypeList.size() - 1)));
 						trade3.setSecurityType(trade2.getSecurityType());
 						double increase;
 						//if put type then SBB situation
 						if(trade2.getSecurityType()=="Put") {	
-							trade2.setType("sell");
-							trade3.setType("buy");
+							trade2.setType("Sell");
+							trade3.setType("Buy");
 							increase = ((double) trade.getQuantity())/100 * (-5);
 						}
 						else {
 							//for call option bullish view propagates
-							trade2.setType("buy");
-							trade3.setType("sell");
+							trade2.setType("Buy");
+							trade3.setType("Sell");
 							increase = ((double) trade.getQuantity())/100 * 5;
 						}
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
@@ -120,18 +120,18 @@ public class DatasetGenerator {
 						tradeList.add(trade3);
 					}
 					
-					else if(trade.getType() == "sell") {
+					else if(trade.getType() == "Sell") {
 						trade2.setSecurityType(securityTypeList.get(generateRandomNumber(0, securityTypeList.size() - 1)));
 						trade3.setSecurityType(trade2.getSecurityType());
 						double decrease;
 						if(trade2.getSecurityType()=="Put") {
-							trade2.setType("buy");
-							trade3.setType("sell");
+							trade2.setType("Buy");
+							trade3.setType("Sell");
 							decrease = ((double) trade.getQuantity())/100 * (-5);
 						}
 						else {
-							trade2.setType("sell");
-							trade3.setType("buy");
+							trade2.setType("Sell");
+							trade3.setType("Buy");
 							decrease = ((double) trade.getQuantity())/100 * 5;
 						}
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
@@ -239,8 +239,8 @@ public class DatasetGenerator {
 	 */
 	public List<String> generateTradeTypes() {
 		List<String> tradeTypes = new ArrayList<String>();
-		tradeTypes.add("buy");
-		tradeTypes.add("sell");
+		tradeTypes.add("Buy");
+		tradeTypes.add("Sell");
 		return tradeTypes;
 	}
 	
