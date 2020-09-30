@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.tradesurveil.bean.FrontRunningScenario;
-import com.tradesurveil.bean.TradeForDataGen;
-import com.tradesurveil.businesslogic.DetectFrontRunning;
+import com.citi.bean.FrontRunningScenario;
+import com.citi.bean.TradeForDataGen;
+import com.citi.businesslogic.DetectFrontRunning;
 
 
 class DetectFrontRunningBBSTest {
