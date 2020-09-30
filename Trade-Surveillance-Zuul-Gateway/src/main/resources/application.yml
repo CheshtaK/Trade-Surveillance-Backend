@@ -1,0 +1,4 @@
+zuul:
+  routes:    trade-surveillance-service:
+      path: /trade-surveillance-service/**
+      url: http://localhost:8080/

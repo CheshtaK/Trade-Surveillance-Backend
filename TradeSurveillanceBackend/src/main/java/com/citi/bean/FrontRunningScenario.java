@@ -6,6 +6,9 @@ package com.citi.bean;
 import java.util.List;
 
 /**
+ * FrontRunningScenario object has 2 data members :- 
+ * a list of detected front-running trades, 
+ * and the a string representing the scenario detected.
  * @author Khyati
  *
  */

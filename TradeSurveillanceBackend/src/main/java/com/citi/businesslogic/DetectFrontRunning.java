@@ -15,7 +15,7 @@ import com.citi.controller.TradeController;
 import java.util.ArrayList;
 
 /**
- * DetectFrontRunning is used in front running trade detection
+ * DetectFrontRunning object is used to execute the front running trade detection method
  * @author Khyati
  *
  */
@@ -23,11 +23,13 @@ public class DetectFrontRunning {
 	
 	private static final Logger log = LoggerFactory.getLogger(DetectFrontRunning.class);
 	
-	// Hashmap to store detected front-running transactions along with the scenario
+	// List to store detected front-running trades as FrontRunningScenario objects
 	private List<FrontRunningScenario> detectedTrades = new ArrayList<>();
+	
+	// List to store indices of large client trades
 	private List<Integer> indexListLargeClients = new ArrayList<>();
 	
-	//HARDCODED AND TO BE UPDATED
+	//Thresholds for Detection Algorithm - HARDCODED AND TO BE UPDATED
 	private double thresholdSecurityValue = 5000d;
 	private long thresholdTimeMilliseconds = 60000;
 	
@@ -92,8 +94,8 @@ public class DetectFrontRunning {
 					String ClientSecurityType = clientOrder.getSecurityType();
 					
 					//Scenario 1 - BBS
-					if(firmOrderPast.getType().equals("buy") &&
-							clientOrder.getType().equals("buy")) {
+					if(firmOrderPast.getType().equals("Buy") &&
+							clientOrder.getType().equals("Buy")) {
 						
 						for(int idxFuture: futureTradesIndex) {
 							firmOrderFuture = tradeList.get(idxFuture);
@@ -118,8 +120,8 @@ public class DetectFrontRunning {
 						}
 					}
 					//Scenario 2 - SSB
-					else if(firmOrderPast.getType().equals("sell") &&
-							clientOrder.getType().equals("sell")) {
+					else if(firmOrderPast.getType().equals("Sell") &&
+							clientOrder.getType().equals("Sell")) {
 						
 						for(int idxFuture: futureTradesIndex) {
 							firmOrderFuture = tradeList.get(idxFuture);
@@ -146,8 +148,8 @@ public class DetectFrontRunning {
 						}	
 					}
 					//Scenario 3 - BSS
-					else if(firmOrderPast.getType().equals("buy") &&
-							clientOrder.getType().equals("sell")) {
+					else if(firmOrderPast.getType().equals("Buy") &&
+							clientOrder.getType().equals("Sell")) {
 						
 						for(int idxFuture: futureTradesIndex) {
 							firmOrderFuture = tradeList.get(idxFuture);
@@ -170,8 +172,8 @@ public class DetectFrontRunning {
 						}	
 					}
 					//Scenario 4 - SBB
-					else if(firmOrderPast.getType().equals("sell") &&
-							clientOrder.getType().equals("buy")) {
+					else if(firmOrderPast.getType().equals("Sell") &&
+							clientOrder.getType().equals("Buy")) {
 						
 						for(int idxFuture: futureTradesIndex) {
 							firmOrderFuture = tradeList.get(idxFuture);
