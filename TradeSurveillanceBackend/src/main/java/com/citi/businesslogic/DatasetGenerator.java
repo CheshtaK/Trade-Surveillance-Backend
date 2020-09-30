@@ -79,7 +79,7 @@ public class DatasetGenerator {
 				TradeForDataGen trade2 = new TradeForDataGen();
 				TradeForDataGen trade3 = new TradeForDataGen();
 				
-				if(trade.getTraderName()!="Citi Group") {
+				if(trade.getTraderName()!="Citi Global Markets") {
 					
 					if(trade.getType() == "buy") {
 						trade2.setSecurityType(securityTypeList.get(generateRandomNumber(0, securityTypeList.size() - 1)));
@@ -99,7 +99,7 @@ public class DatasetGenerator {
 						}
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
 						trade2.setTimestamp(timestamp2);
-						trade2.setTraderName("Citi Group");
+						trade2.setTraderName("Citi Global Markets");
 						trade2.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
 						trade2.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade2.setSecurityName(trade.getSecurityName());
@@ -109,7 +109,7 @@ public class DatasetGenerator {
 						
 						timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(1, 3) * 1000);
 						trade3.setTimestamp(timestamp);
-						trade3.setTraderName("Citi Group");
+						trade3.setTraderName("Citi Global Markets");
 						trade3.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
 						trade3.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade3.setSecurityName(trade2.getSecurityName());
@@ -136,7 +136,7 @@ public class DatasetGenerator {
 						}
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
 						trade2.setTimestamp(timestamp2);
-						trade2.setTraderName("Citi Group");
+						trade2.setTraderName("Citi Global Markets");
 						trade2.setBrokerName(trade.getBrokerName());
 						trade2.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade2.setSecurityName(trade.getSecurityName());
@@ -146,7 +146,7 @@ public class DatasetGenerator {
 						
 						timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(1, 3) * 1000);
 						trade3.setTimestamp(timestamp);
-						trade3.setTraderName("Citi Group");
+						trade3.setTraderName("Citi Global Markets");
 						trade3.setBrokerName(trade.getBrokerName());
 						trade3.setQuantity(generateRandomNumber(trade.getQuantity()/2,trade.getQuantity() ));
 						trade3.setSecurityName(trade.getSecurityName());
@@ -188,10 +188,10 @@ public class DatasetGenerator {
 	public List<String> generateBrokerList() {
 		List<String> brokerList = new ArrayList<String>();
 		brokerList.add("Citi Velocity");
-		brokerList.add("Kotak Securities");
-		brokerList.add("ICICI Direct");
-		brokerList.add("Sharekhan");
-		brokerList.add("Zerodha");
+		brokerList.add("Charles Schwab");
+		brokerList.add("Fidelity Investments");
+		brokerList.add("E*TRADE");
+		brokerList.add("TD Ameritrade");
 		return brokerList;
 	}
 	
@@ -201,10 +201,10 @@ public class DatasetGenerator {
 	 */
 	public List<String> generateTraderList() {
 		List<String> traderList = new ArrayList<String>();
-		traderList.add("Citi Group");
-		traderList.add("Raytheon Technologies");
-		traderList.add("LVMH Moët Hennessy Louis Vuitton");
-		traderList.add("Alibaba Group");
+		traderList.add("Citi Global Markets");
+		traderList.add("Vanguard Group");
+		traderList.add("Bridgewater Associates");
+		traderList.add("Goldman Sachs");
 		return traderList;
 	}
 	
@@ -252,20 +252,20 @@ public class DatasetGenerator {
 		
 		Map<String, Double> initialMarketPrice = new HashMap<String, Double>();
 		
-		initialMarketPrice.put("Apple-ES", 8074.27);
-		initialMarketPrice.put("Apple-Futures",7074.27);
-		initialMarketPrice.put("Apple-Call", 6774.27);
-		initialMarketPrice.put("Apple-Put", 5374.27);
+		initialMarketPrice.put("Apple-ES", 114.09);
+		initialMarketPrice.put("Apple-Futures",113.25);
+		initialMarketPrice.put("Apple-Call", 54.10);
+		initialMarketPrice.put("Apple-Put", 0.01);
 		
-		initialMarketPrice.put("Facebook-ES", 9444.31);
-		initialMarketPrice.put("Facebook-Futures", 6274.31);
-		initialMarketPrice.put("Facebook-Call", 8000.31);
-		initialMarketPrice.put("Facebook-Put", 5667.31);
+		initialMarketPrice.put("Facebook-ES", 261.79);
+		initialMarketPrice.put("Facebook-Futures", 260.79);
+		initialMarketPrice.put("Facebook-Call", 105.55);
+		initialMarketPrice.put("Facebook-Put", 0.05);
 		
-		initialMarketPrice.put("Walmart-ES", 8774.60);
-		initialMarketPrice.put("Walmart-Futures", 12074.60);
-		initialMarketPrice.put("Walmart-Call", 7074.60);
-		initialMarketPrice.put("Walmart-Put", 4074.60);
+		initialMarketPrice.put("Walmart-ES", 137.15);
+		initialMarketPrice.put("Walmart-Futures", 102.00);
+		initialMarketPrice.put("Walmart-Call", 31.15);
+		initialMarketPrice.put("Walmart-Put", 0.14);
 		
 		return initialMarketPrice;
 	}
