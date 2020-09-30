@@ -12,10 +12,10 @@ public class TradeMapper implements RowMapper<TradeForDataGen> {
 		TradeForDataGen trade = new TradeForDataGen();
 		trade.setType(rs.getString("type"));
 		trade.setTimestamp(rs.getTimestamp("timestamp"));
-		trade.setSecurityName(rs.getString("security_name"));
-		trade.setSecurityType(rs.getString("security_type"));
-		trade.setBrokerName(rs.getString("broker_name"));
-		trade.setTraderName(rs.getString("trader_name"));
+		trade.setSecurityName(rs.getString("securityName"));
+		trade.setSecurityType(rs.getString("securityType"));
+		trade.setBrokerName(rs.getString("brokerName"));
+		trade.setTraderName(rs.getString("traderName"));
 		trade.setQuantity(rs.getInt("quantity"));
 		trade.setPrice(rs.getDouble("price"));
 		return trade;

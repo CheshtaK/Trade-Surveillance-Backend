@@ -23,9 +23,10 @@ public class TradeJDBCTemplate implements TradeDAO {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
-	public void insertTrade(TradeForDataGen trade) {
-		String SQL = "INSERT INTO Trades (type, timestamp, security_name, security_type, broker_name, trader_name, quantity, price) values (?, ?, ?, ?, ?, ?, ?, ?)";
+	public String insertTrade(TradeForDataGen trade) {
+		String SQL = "INSERT INTO Trades (type, timestamp, securityName, securityType, brokerName, traderName, quantity, price) values (?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplateObject.update(SQL, trade.getType(), trade.getTimestamp(), trade.getSecurityName(), trade.getSecurityType(), trade.getBrokerName(), trade.getTraderName(), trade.getQuantity(), trade.getPrice());
+		return "insert done";
 	}
 
 	public List<TradeForDataGen> fetchTradeList() {
@@ -44,7 +45,7 @@ public class TradeJDBCTemplate implements TradeDAO {
 	public void deleteTrades() {
 		String SQL = "DROP TABLE IF EXISTS Trades;";
 		jdbcTemplateObject.execute(SQL);
-		SQL = "CREATE TABLE Trades (trade_id INT NOT NULL AUTO_INCREMENT, type VARCHAR(45), timestamp TIMESTAMP, security_name VARCHAR(45), security_type VARCHAR(45), broker_name VARCHAR(45), trader_name VARCHAR(45), quantity INT, price DOUBLE(10,2), PRIMARY KEY (trade_id));";
+		SQL = "CREATE TABLE Trades (trade_id INT NOT NULL AUTO_INCREMENT, type VARCHAR(45), timestamp TIMESTAMP, securityName VARCHAR(45), securityType VARCHAR(45), brokerName VARCHAR(45), traderName VARCHAR(45), quantity INT, price DOUBLE(10,2), PRIMARY KEY (trade_id));";
 		jdbcTemplateObject.execute(SQL);
 	}
 	

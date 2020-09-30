@@ -15,7 +15,7 @@ import com.tradesurveil.bean.TradeForDataGen;
 public interface TradeDAO {
 
 	public void setDataSource(DataSource ds);
-	public void insertTrade(TradeForDataGen trade);
+	public String insertTrade(TradeForDataGen trade);
 	public List<TradeForDataGen> fetchTradeList();
 	public void insertTradeList(List<TradeForDataGen> tradeList);
 	public void deleteTrades();
