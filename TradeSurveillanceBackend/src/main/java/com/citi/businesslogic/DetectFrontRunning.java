@@ -109,8 +109,8 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(firmOrderPast);
-							temp.add(clientOrder);
+							temp.add(0, firmOrderPast);
+							temp.add(1, clientOrder);
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
 							scenario.setScenario("FR1-BBS");
@@ -136,8 +136,8 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(firmOrderPast);
-							temp.add(clientOrder);
+							temp.add(0, firmOrderPast);
+							temp.add(1, clientOrder);
 							
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
@@ -160,8 +160,8 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(firmOrderPast);
-							temp.add(clientOrder);
+							temp.add(0, firmOrderPast);
+							temp.add(1, clientOrder);
 							
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
@@ -184,8 +184,8 @@ public class DetectFrontRunning {
 							}		
 						}
 						if(temp.size() != 0) {
-							temp.add(firmOrderPast);
-							temp.add(clientOrder);
+							temp.add(0, firmOrderPast);
+							temp.add(1, clientOrder);
 							
 							FrontRunningScenario scenario = new FrontRunningScenario();
 							scenario.setInvolvedTrades(temp);
