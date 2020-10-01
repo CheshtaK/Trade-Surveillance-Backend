@@ -210,7 +210,7 @@ public class DatasetGenerator {
 		traderList.add("Citi Global Markets");
 		traderList.add("Vanguard Group");
 		traderList.add("Bridgewater Associates");
-		traderList.add("Goldman Sachs");
+		traderList.add("D. E. Shaw & Co.");
 		return traderList;
 	}
 	

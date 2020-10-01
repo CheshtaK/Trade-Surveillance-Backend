@@ -40,7 +40,7 @@ public class DetectFrontRunning {
 		 * */
 		for(int i = 0; i < tradeList.size(); i++) {
 			TradeForDataGen currTrade = tradeList.get(i);
-			if(!currTrade.getTraderName().equals("Citi Group") && 
+			if(!currTrade.getTraderName().equals("Citi Global Markets") && 
 					currTrade.getQuantity() * currTrade.getPrice() >= thresholdSecurityValue)
 				indexListLargeClients.add(i);
 		}
@@ -82,7 +82,7 @@ public class DetectFrontRunning {
 				firmOrderPast = tradeList.get(idxPast);
 				
 				// check if a firm order is placed for the same corporation as the client trade
-				if(firmOrderPast.getTraderName().equals("Citi Group") &&
+				if(firmOrderPast.getTraderName().equals("Citi Global Markets") &&
 						firmOrderPast.getSecurityName().equals(clientOrder.getSecurityName())) {
 					
 					List<Integer> futureTradesIndex = getFutureFirmTrades(tradeList, idxPast, i);
