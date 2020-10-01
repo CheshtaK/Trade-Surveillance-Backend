@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.citi.bean.TradeForDataGen;
 import com.citi.controller.TradeController;
 
+
 /**
  * DatasetGenerator generates the entire trade dataset including the front running trades
  * @author Kryselle, Vishal
@@ -21,14 +22,19 @@ public class DatasetGenerator {
 
 	private static final Logger log = LoggerFactory.getLogger(DatasetGenerator.class);
 	
+	// TODO: change range of quantity after changing prices to USD
+	private double thresholdSecurityValue = 100000d;
+	
 	List<String> brokerList = generateBrokerList();
 	List<String> traderList = generateTraderList();
 	List<String> securityNameList = generateSecurityNameList();
 	List<String> securityTypeList = generateSecurityTypeList();
 	List<String> tradeTypes = generateTradeTypes();
 	Map<String, Double> marketPrice = initialMarketPrice();
-	static Timestamp timestamp = Timestamp.valueOf("2020-10-05 09:00:00");
-	Timestamp closingTime = Timestamp.valueOf("2020-10-05 15:00:00");
+	
+	// Timestamps in IST for conversion in GMT
+	static Timestamp timestamp = Timestamp.valueOf("2020-10-05 14:30:00");
+	Timestamp closingTime = Timestamp.valueOf("2020-10-05 20:30:00");
 	
 	/**
 	 * generateRandomTrades generates the entire trade list including front running trades
@@ -74,7 +80,7 @@ public class DatasetGenerator {
 			
 			
 			//code for front running 
-			if(trade.getPrice()*trade.getQuantity()>=640000 && (trade.getSecurityType()=="ES"||trade.getSecurityType()=="Futures")) {
+			if(trade.getPrice()*trade.getQuantity()>= thresholdSecurityValue && (trade.getSecurityType()=="ES"||trade.getSecurityType()=="Futures")) {
 
 				TradeForDataGen trade2 = new TradeForDataGen();
 				TradeForDataGen trade3 = new TradeForDataGen();
@@ -204,7 +210,7 @@ public class DatasetGenerator {
 		traderList.add("Citi Global Markets");
 		traderList.add("Vanguard Group");
 		traderList.add("Bridgewater Associates");
-		traderList.add("Goldman Sachs");
+		traderList.add("D. E. Shaw & Co.");
 		return traderList;
 	}
 	
