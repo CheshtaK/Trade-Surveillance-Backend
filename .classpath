@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="TradeSurveillanceBackend/.mvn/wrapper/|TradeSurveillanceBackend/src/main/java/|TradeSurveillanceBackend/src/test/java/" kind="src" path=""/>
+	<classpathentry kind="src" path="TradeSurveillanceBackend/.mvn/wrapper"/>
+	<classpathentry kind="src" path="TradeSurveillanceBackend/src/main/java"/>
+	<classpathentry kind="src" path="TradeSurveillanceBackend/src/test/java"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -255,17 +255,17 @@ public class DatasetGenerator {
 		initialMarketPrice.put("Apple-ES", 114.09);
 		initialMarketPrice.put("Apple-Futures",113.25);
 		initialMarketPrice.put("Apple-Call", 54.10);
-		initialMarketPrice.put("Apple-Put", 0.01);
+		initialMarketPrice.put("Apple-Put", 51.01);
 		
 		initialMarketPrice.put("Facebook-ES", 261.79);
 		initialMarketPrice.put("Facebook-Futures", 260.79);
 		initialMarketPrice.put("Facebook-Call", 105.55);
-		initialMarketPrice.put("Facebook-Put", 0.05);
+		initialMarketPrice.put("Facebook-Put", 102.05);
 		
 		initialMarketPrice.put("Walmart-ES", 137.15);
 		initialMarketPrice.put("Walmart-Futures", 102.00);
 		initialMarketPrice.put("Walmart-Call", 31.15);
-		initialMarketPrice.put("Walmart-Put", 0.14);
+		initialMarketPrice.put("Walmart-Put", 30.14);
 		
 		return initialMarketPrice;
 	}
