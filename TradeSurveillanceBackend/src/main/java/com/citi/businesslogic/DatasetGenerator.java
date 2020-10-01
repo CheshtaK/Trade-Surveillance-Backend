@@ -63,7 +63,7 @@ public class DatasetGenerator {
 			trade.setTraderName(traderList.get(generateRandomNumber(0, traderList.size() - 1)));
 			
 			//HARDCODED QUANTITY RANGE of 100
-			trade.setQuantity(generateRandomNumber(1, 100));
+			trade.setQuantity(generateRandomNumber(1, 600));
 			
 			//HARDCODED MARKET PRICE TO INCREASE PROPORTIONALLY TO QUANTITY IN CASE OF BUY AND DECREASE IN CASE OF SELL WITHIN 5 RUPEE RANGE
 			double currentMarketPrice = marketPrice.get(trade.getSecurityName()+"-"+trade.getSecurityType());
