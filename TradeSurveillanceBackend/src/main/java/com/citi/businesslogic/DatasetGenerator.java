@@ -63,7 +63,7 @@ public class DatasetGenerator {
 			trade.setTraderName(traderList.get(generateRandomNumber(0, traderList.size() - 1)));
 			
 			//HARDCODED QUANTITY RANGE of 100
-			trade.setQuantity(generateRandomNumber(1, 600));
+			trade.setQuantity(generateRandomNumber(500, 1100));
 			
 			//HARDCODED MARKET PRICE TO INCREASE PROPORTIONALLY TO QUANTITY IN CASE OF BUY AND DECREASE IN CASE OF SELL WITHIN 5 RUPEE RANGE
 			double currentMarketPrice = marketPrice.get(trade.getSecurityName()+"-"+trade.getSecurityType());
@@ -95,13 +95,13 @@ public class DatasetGenerator {
 						if(trade2.getSecurityType()=="Put") {	
 							trade2.setType("Sell");
 							trade3.setType("Buy");
-							increase = ((double) trade.getQuantity())/100 * (-5);
+							increase = ((double) trade.getQuantity())/600 * (-5);
 						}
 						else {
 							//for call option bullish view propagates
 							trade2.setType("Buy");
 							trade3.setType("Sell");
-							increase = ((double) trade.getQuantity())/100 * 5;
+							increase = ((double) trade.getQuantity())/600 * 5;
 						}
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
 						trade2.setTimestamp(timestamp2);
@@ -133,12 +133,12 @@ public class DatasetGenerator {
 						if(trade2.getSecurityType()=="Put") {
 							trade2.setType("Buy");
 							trade3.setType("Sell");
-							decrease = ((double) trade.getQuantity())/100 * (-5);
+							decrease = ((double) trade.getQuantity())/600 * (-5);
 						}
 						else {
 							trade2.setType("Sell");
 							trade3.setType("Buy");
-							decrease = ((double) trade.getQuantity())/100 * 5;
+							decrease = ((double) trade.getQuantity())/600 * 5;
 						}
 						Timestamp timestamp2 = new Timestamp(timestamp.getTime() - generateRandomNumber(1, 3) * 1000);
 						trade2.setTimestamp(timestamp2);
