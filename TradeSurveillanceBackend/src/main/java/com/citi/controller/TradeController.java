@@ -49,10 +49,9 @@ public class TradeController {
 	 * @return confirmation of insert
 	 */
 	@RequestMapping(value = TradeRestURIConstants.INSERT_TRADE, method = RequestMethod.POST)
-	public @ResponseBody String insertTrade(@RequestBody TradeForDataGen trade) {
+	public @ResponseBody void insertTrade(@RequestBody TradeForDataGen trade) {
 		log.info("Trade inserted");
 		tradeJDBCTemplate.insertTrade(trade);
-		return "Trade inserted";
 	}
 	
 	/**
