@@ -50,11 +50,11 @@ class DetectFrontRunningSBB {
 		/**
 		 * Test for <Put option, Equity shares, Put option> combination in Scenario 4
 		 */
-		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 9:05:38","Apple", "Put",130, 1412.96, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderPast = initializeData("Sell","2020-10-05 9:05:38","Apple", "Put",130, 1412.96, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderPast);
-		TradeForDataGen clientOrder = initializeData("buy","2020-10-05 9:05:42","Apple", "ES",9500, 1411.96, "Client", "Citi" );
+		TradeForDataGen clientOrder = initializeData("Buy","2020-10-05 9:05:42","Apple", "ES",9500, 1411.96, "Client", "Citi" );
 		tradeList.add(clientOrder);
-		TradeForDataGen firmOrderFuture = initializeData("buy","2020-10-05 9:05:50","Apple", "Put",130, 1409.24, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderFuture = initializeData("Buy","2020-10-05 9:05:50","Apple", "Put",130, 1409.24, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderFuture);
 		
 		DetectFrontRunning tester = new DetectFrontRunning();
@@ -68,11 +68,11 @@ class DetectFrontRunningSBB {
 		/**
 		 * Test for <Put option, Put option, Put option> combination in Scenario 4
 		 */
-		TradeForDataGen firmOrderPast = initializeData("sell","2020-10-05 9:05:38","Walmart", "Put",250, 1635.56, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderPast = initializeData("Sell","2020-10-05 9:05:38","Walmart", "Put",250, 1635.56, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderPast);
-		TradeForDataGen clientOrder = initializeData("buy","2020-10-05 9:05:42","Walmart", "Futures",13000, 1635.58, "Client", "Citi" );
+		TradeForDataGen clientOrder = initializeData("Buy","2020-10-05 9:05:42","Walmart", "Futures",13000, 1635.58, "Client", "Citi" );
 		tradeList.add(clientOrder);
-		TradeForDataGen firmOrderFuture = initializeData("buy","2020-10-05 9:05:50","Walmart", "Put",250, 1629.03, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderFuture = initializeData("Buy","2020-10-05 9:05:50","Walmart", "Put",250, 1629.03, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderFuture);
 		
 		DetectFrontRunning tester = new DetectFrontRunning();
