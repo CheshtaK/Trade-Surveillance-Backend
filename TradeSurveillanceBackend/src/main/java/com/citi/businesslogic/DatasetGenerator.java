@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.citi.bean.TradeForDataGen;
+import com.citi.bean.WashTradeScenario;
 import com.citi.controller.TradeController;
 
 
@@ -49,14 +50,57 @@ public class DatasetGenerator {
 		
 		for (int i = 0; i < randomNumber; i++) {
 			TradeForDataGen trade = new TradeForDataGen();
-			trade.setType(tradeTypes.get(generateRandomNumber(0, tradeTypes.size() - 1)));
 			
 			//HARDCODED TIMESTAMP INCREASE RANGE OF 10s
 			timestamp = new Timestamp(timestamp.getTime() + generateRandomNumber(4, 10) * 1000);
 			if(timestamp.compareTo(closingTime) >= 0)
 				return tradeList;
 			trade.setTimestamp(timestamp);
+//code for wash trades
 			
+			if(i%generateRandomNumber(2,3)==0 && i> (randomNumber/2) )
+			{
+				int k=generateRandomNumber(0,i-1);
+				TradeForDataGen oldtrade = tradeList.get(k);
+				
+				if(oldtrade.getTraderName()=="Citi Global Markets")
+				{
+				trade.setBrokerName(oldtrade.getBrokerName());
+				trade.setTraderName(oldtrade.getTraderName());
+				trade.setSecurityName(oldtrade.getSecurityName());
+				trade.setSecurityType(securityTypeList.get(generateRandomNumber(0, securityTypeList.size() - 1)));
+				
+				
+				double currentMarketPrice = marketPrice.get(trade.getSecurityName()+"-"+trade.getSecurityType());
+				double increase; 
+				int quantity;
+				quantity =(int) ((oldtrade.getPrice()*oldtrade.getQuantity())/currentMarketPrice);
+				
+				trade.setPrice(currentMarketPrice);
+				trade.setQuantity(quantity);
+				
+				if(oldtrade.getType()=="Buy")
+				{
+					trade.setType("Sell w");
+					 increase = ((double) trade.getQuantity())/600 * (-5);
+				}
+				else
+				{
+					trade.setType("Buy w");
+					increase = ((double) trade.getQuantity())/600 * 5;
+				}
+				
+				double newMarketPrice =  marketPrice.get(trade.getSecurityName()+"-"+trade.getSecurityType()) +increase;
+				marketPrice.replace(trade.getSecurityName()+"-"+trade.getSecurityType(), newMarketPrice);
+				tradeList.add(trade);
+			//	System.out.println("wash"+oldtrade.getType() + "\t" + oldtrade.getTimestamp() + "\t" + oldtrade.getSecurityName() + "\t" + oldtrade.getSecurityType() + "\t" + oldtrade.getBrokerName() + "\t" + oldtrade.getTraderName() + "\t" + oldtrade.getPrice() + "\t" + oldtrade.getQuantity());
+				}
+				
+			}
+			
+			else
+			{
+			trade.setType(tradeTypes.get(generateRandomNumber(0, tradeTypes.size() - 1)));
 			trade.setSecurityName(securityNameList.get(generateRandomNumber(0, securityNameList.size() - 1)));
 			trade.setSecurityType(securityTypeList.get(generateRandomNumber(0, securityTypeList.size() - 1)));
 			trade.setBrokerName(brokerList.get(generateRandomNumber(0, brokerList.size() - 1)));
@@ -171,6 +215,7 @@ public class DatasetGenerator {
 				tradeList.add(trade);
 			}
 		}
+		}
 		log.info("Random trade list including front running trades generated");
 		return tradeList;
 		
@@ -274,5 +319,24 @@ public class DatasetGenerator {
 		initialMarketPrice.put("Walmart-Put", 30.14);
 		
 		return initialMarketPrice;
+	}
+	public static void main(String args[]) {
+		DatasetGenerator datasetGenerator = new DatasetGenerator();
+		List<TradeForDataGen> tradeList = new ArrayList<TradeForDataGen>();
+		tradeList = datasetGenerator.generateRandomTrades(90, 100);
+		for(TradeForDataGen trade: tradeList) {
+			System.out.println(trade.getType() + "\t" + trade.getTimestamp() + "\t" + trade.getSecurityName() + "\t" + trade.getSecurityType() + "\t" + trade.getBrokerName() + "\t" + trade.getTraderName() + "\t" + trade.getPrice() + "\t" + trade.getQuantity());
+		}
+	
+		List<WashTradeScenario> detectedTrades = new ArrayList<>();	
+	//	 DetectWashTrades abc = new DetectWashTrades();
+		//detectedTrades= abc.detectWashTrade(tradeList);
+		//System.out.println("size :"+detectedTrades.size());
+		//for(WashTradeScenario trade: detectedTrades) {
+			//System.out.println();
+		//}
+		
+		
+		
 	}
 }
