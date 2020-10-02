@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citi.bean.FrontRunningScenario;
 import com.citi.bean.TradeForDataGen;
+import com.citi.bean.WashTradeScenario;
 import com.citi.businesslogic.DetectFrontRunning;
+import com.citi.businesslogic.DetectWashTrades;
 import com.citi.dao.TradeJDBCTemplate;
 
 /**
@@ -76,5 +78,15 @@ public class TradeController {
 		List<FrontRunningScenario> frontRunningTradeList = detector.detectFrontRunning(tradeList);
 		log.info("Front running trades detected and sent");
 		return frontRunningTradeList;
+	}
+	
+	
+	@RequestMapping(value = TradeRestURIConstants.GET_WASH_TRADES, method = RequestMethod.GET)
+	public @ResponseBody List<WashTradeScenario> WashTradesDetector() {
+		List<TradeForDataGen> tradeList = tradeJDBCTemplate.fetchTradeListForWashTrades();
+		DetectWashTrades detector = new DetectWashTrades();
+		List<WashTradeScenario> WashTradeList = detector.detectWashTrades(tradeList);
+		log.info("Front running trades detected and sent");
+		return WashTradeList;
 	}
 }
