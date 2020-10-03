@@ -11,4 +11,5 @@ public class TradeRestURIConstants {
 	public static final String FETCH_TRADELIST = "/fetchTradeList";
 	public static final String GET_FRONT_RUNNING_TRADES = "/getFrontRunningTrades";
 	public static final String SEND_EMAIL = "/sendEmail";
+	public static final String GET_WASH_TRADES = "/getWashTrades";
 }

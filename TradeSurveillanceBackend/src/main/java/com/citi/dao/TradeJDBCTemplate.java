@@ -151,6 +151,16 @@ public class TradeJDBCTemplate implements TradeDAO {
 		   
 		message.setContent( multipart );
 		   
-		Transport.send(message);   
+		Transport.send(message);
+	}
+	
+	/**
+	 * @return TradeList with only Firm Trades
+	 */
+	public List<TradeForDataGen> fetchTradeListForWashTrades(){
+		String SQL = "SELECT * FROM Trades where traderName = 'Citi Global Markets' ORDER BY timestamp ASC ;";
+		List<TradeForDataGen> tradeList = jdbcTemplateObject.query(SQL, new TradeMapper());
+		log.info("Trade list fetched from database for Wash Trade Detection");
+		return tradeList;
 	}
 }

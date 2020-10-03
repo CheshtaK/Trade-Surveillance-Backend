@@ -49,11 +49,11 @@ class DetectFrontRunningBSS {
 		/**
 		 * Test for <Put option, Equity shares, Put option> combination in Scenario 3
 		 */
-		TradeForDataGen firmOrderPast = initializeData("buy","2020-10-05 9:05:38","Facebook", "Put",130, 18444.31, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderPast = initializeData("Buy","2020-10-05 9:05:38","Facebook", "Put",130, 18444.31, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderPast);
-		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:05:42","Facebook", "ES",9500, 18444.43, "Client", "Citi" );
+		TradeForDataGen clientOrder = initializeData("Sell","2020-10-05 9:05:42","Facebook", "ES",9500, 18444.43, "Client", "Citi" );
 		tradeList.add(clientOrder);
-		TradeForDataGen firmOrderFuture = initializeData("sell","2020-10-05 9:05:50","Facebook", "Put",130, 18500.31, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderFuture = initializeData("Sell","2020-10-05 9:05:50","Facebook", "Put",130, 18500.31, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderFuture);
 		
 		DetectFrontRunning tester = new DetectFrontRunning();
@@ -67,11 +67,11 @@ class DetectFrontRunningBSS {
 		/**
 		 * Test for <Put option, Put option, Put option> combination in Scenario 3
 		 */
-		TradeForDataGen firmOrderPast = initializeData("buy","2020-10-05 9:05:38","Facebook", "Put",130, 18444.31, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderPast = initializeData("Buy","2020-10-05 9:05:38","Facebook", "Put",130, 18444.31, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderPast);
-		TradeForDataGen clientOrder = initializeData("sell","2020-10-05 9:05:42","Facebook", "Futures",9500, 18444.43, "Client", "Citi" );
+		TradeForDataGen clientOrder = initializeData("Sell","2020-10-05 9:05:42","Facebook", "Futures",9500, 18444.43, "Client", "Citi" );
 		tradeList.add(clientOrder);
-		TradeForDataGen firmOrderFuture = initializeData("sell","2020-10-05 9:05:50","Facebook", "Put",130, 18500.31, "Citi Group", "Citi" );
+		TradeForDataGen firmOrderFuture = initializeData("Sell","2020-10-05 9:05:50","Facebook", "Put",130, 18500.31, "Citi Global Markets", "Citi" );
 		tradeList.add(firmOrderFuture);
 		
 		DetectFrontRunning tester = new DetectFrontRunning();

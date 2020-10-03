@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citi.bean.FrontRunningScenario;
 import com.citi.bean.TradeForDataGen;
+import com.citi.bean.WashTradeScenario;
 import com.citi.businesslogic.DetectFrontRunning;
+import com.citi.businesslogic.DetectWashTrades;
 import com.citi.dao.TradeJDBCTemplate;
 import com.sun.xml.messaging.saaj.packaging.mime.MessagingException;
 
@@ -91,5 +93,14 @@ public class TradeController {
 	public String sendEmail() throws MessagingException, IOException, javax.mail.MessagingException {
 		tradeJDBCTemplate.sendmail();
 		return "Email sent successfully";
+	}
+	
+	@RequestMapping(value = TradeRestURIConstants.GET_WASH_TRADES, method = RequestMethod.GET)
+	public @ResponseBody List<WashTradeScenario> WashTradesDetector() {
+		List<TradeForDataGen> tradeList = tradeJDBCTemplate.fetchTradeListForWashTrades();
+		DetectWashTrades detector = new DetectWashTrades();
+		List<WashTradeScenario> WashTradeList = detector.detectWashTrades(tradeList);
+		log.info("Front running trades detected and sent");
+		return WashTradeList;
 	}
 }
