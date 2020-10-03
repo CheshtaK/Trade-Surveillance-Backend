@@ -1,5 +1,6 @@
 package com.citi.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import com.citi.bean.FrontRunningScenario;
 import com.citi.bean.TradeForDataGen;
 import com.citi.businesslogic.DetectFrontRunning;
 import com.citi.dao.TradeJDBCTemplate;
+import com.sun.xml.messaging.saaj.packaging.mime.MessagingException;
 
 /**
 * TradeController is the REST Controller used by the application
@@ -76,5 +78,18 @@ public class TradeController {
 		List<FrontRunningScenario> frontRunningTradeList = detector.detectFrontRunning(tradeList);
 		log.info("Front running trades detected and sent");
 		return frontRunningTradeList;
+	}
+	
+	/**
+	 * sendEmail sends an email to the concerned authority to warn them about front running scenarios detected
+	 * @return sent email confirmation
+	 * @throws javax.mail.MessagingException 
+	 * @throws IOException 
+	 * @throws MessagingException 
+	 */
+	@RequestMapping(value = TradeRestURIConstants.SEND_EMAIL, method = RequestMethod.GET)
+	public String sendEmail() throws MessagingException, IOException, javax.mail.MessagingException {
+		tradeJDBCTemplate.sendmail();
+		return "Email sent successfully";
 	}
 }
