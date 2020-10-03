@@ -123,7 +123,7 @@ public class TradeJDBCTemplate implements TradeDAO {
 		   
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 		   protected PasswordAuthentication getPasswordAuthentication() {
-		      return new PasswordAuthentication("cheshta.kwatra@gmail.com", "Cheshta@6666");
+		      return new PasswordAuthentication("cheshta.kwatra@gmail.com", "<my password>");
 		   }
 		});
 		   
@@ -151,6 +151,49 @@ public class TradeJDBCTemplate implements TradeDAO {
 		   
 		message.setContent( multipart );
 		   
+		Transport.send(message);
+	}
+	
+	/**
+	 * sendmailWash sends an email warning about the detected scenario
+	 */
+	public void sendmailWash() throws MessagingException, IOException, javax.mail.MessagingException {
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		   
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		   protected PasswordAuthentication getPasswordAuthentication() {
+		      return new PasswordAuthentication("cheshta.kwatra@gmail.com", "<my password>");
+		   }
+		});
+		   
+		MimeMessage message = new MimeMessage( session );
+		Multipart multipart = new MimeMultipart( "alternative" );
+
+
+		message.saveChanges();
+
+		message.setFrom(new InternetAddress("cheshta.kwatra@gmail.com", false));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("cheshta.kwatra@gmail.com"));
+		message.setSubject("Wash Trade | Possible scenario detected");
+		message.setSentDate(new Date());
+		   
+		MimeBodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setContent("A possible wash trade scenario has been detected as on date: October 5th, 2020."
+				   + " Details of the detected transaction are available in the attached pdf."
+				   + " Please evaluate and take necessary actions.", "text/html");
+		   
+		multipart.addBodyPart(messageBodyPart);
+		MimeBodyPart attachPart = new MimeBodyPart();
+
+		attachPart.attachFile("C:/Users/chesh/Downloads/wash_trade.pdf");
+		multipart.addBodyPart(attachPart);
+		   
+		message.setContent( multipart );
+		
 		Transport.send(message);
 	}
 	

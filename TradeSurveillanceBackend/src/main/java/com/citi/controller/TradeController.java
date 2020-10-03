@@ -95,6 +95,19 @@ public class TradeController {
 		return "Email sent successfully";
 	}
 	
+	/**
+	 * sendEmail sends an email to the concerned authority to warn them about wash trade scenarios detected
+	 * @return sent email confirmation
+	 * @throws javax.mail.MessagingException 
+	 * @throws IOException 
+	 * @throws MessagingException 
+	 */
+	@RequestMapping(value = TradeRestURIConstants.SEND_EMAIL_WASH, method = RequestMethod.GET)
+	public String sendEmailWash() throws MessagingException, IOException, javax.mail.MessagingException {
+		tradeJDBCTemplate.sendmailWash();
+		return "Email sent successfully";
+	}
+	
 	@RequestMapping(value = TradeRestURIConstants.GET_WASH_TRADES, method = RequestMethod.GET)
 	public @ResponseBody List<WashTradeScenario> WashTradesDetector() {
 		List<TradeForDataGen> tradeList = tradeJDBCTemplate.fetchTradeListForWashTrades();
