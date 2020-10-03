@@ -95,4 +95,15 @@ public class TradeJDBCTemplate implements TradeDAO {
 		log.info("Trades generated and pushed to database");
 		return tradeList;
 	}
+	
+	
+	/**
+	 * @return TradeList with only Firm Trades
+	 */
+	public List<TradeForDataGen> fetchTradeListForWashTrades(){
+		String SQL = "SELECT * FROM Trades where traderName = 'Citi Global Markets' ORDER BY timestamp ASC ;";
+		List<TradeForDataGen> tradeList = jdbcTemplateObject.query(SQL, new TradeMapper());
+		log.info("Trade list fetched from database for Wash Trade Detection");
+		return tradeList;
+	}
 }
